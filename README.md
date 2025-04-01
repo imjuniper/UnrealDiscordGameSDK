@@ -2,6 +2,9 @@
 
 - Tested Unreal Engine versions: 5.4 & 5.5
 
+> [!NOTE]
+> Discord has now released their new [Social SDK](https://discord.com/developers/docs/discord-social-sdk/overview), with an official Unreal Engine plugin to go along with it. Currently, this new SDK requires manual authentication, since it doesn't communicate with the Discord app directly, which can be annoying in a lot of cases, so this plugin should still be useful to some who require minimal features, such as Rich Presence!
+
 # Installation
 
 ## Pre-built
