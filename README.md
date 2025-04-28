@@ -57,15 +57,15 @@ The **Discord Subsystem** is used to managed the Discord Client and create the t
 Returns whether the subsystem is currently initialized. Will usually return false if the Client ID isn't set in settings, if the Discord SDK binaries are missing or if the Client failed to initialize.
 
 ---
-**`UDiscordActivityManager* GetDiscordActivityManager()`**  
+<b><code>[UDiscordActivityManager](#discord-activity-manager-udiscordactivitymanager)* GetDiscordActivityManager()</code></b>  
 Returns the current instance of [Discord Activity Manager](#discord-activity-manager-udiscordactivitymanager).
 
 ---
-**`UDiscordUserManager* GetDiscordUserManager()`**  
+<b><code>[UDiscordUserManager](#discord-user-manager-udiscordusermanager)* GetDiscordUserManager()</code></b>  
 Returns the current instance of [Discord User Manager](#discord-user-manager-udiscordusermanager).
 
 ---
-**`UDiscordOverlayManager* GetDiscordOverlayManager()`**  
+<b><code>[UDiscordOverlayManager](#discord-overlay-manager-udiscordoverlaymanager)* GetDiscordOverlayManager()</code></b>  
 Returns the current instance of [Discord Overlay Manager](#discord-overlay-manager-udiscordoverlaymanager).
 
 ## Discord Activity Manager (`UDiscordActivityManager`)
@@ -81,7 +81,7 @@ Returns whether the call was a success. Used if you are distributing this SDK on
 > [!NOTE]
 > The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
 
-<b><code>void UpdateActivity(const [FDiscordActivity](#discord-activity-fdiscordactivity) NewActivity, TFunction<void(discord::Result)> Callback)</code><b>  
+<b><code>void UpdateActivity(const [FDiscordActivity](#discord-activity-fdiscordactivity) NewActivity, TFunction<void(discord::Result)> Callback)</code></b>  
 Get user information for a given id.
 
 ---
@@ -98,7 +98,7 @@ Clear's a user's presence in Discord to make it show nothing.
 > [!NOTE]
 > The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
 
-<b><code>void SendRequestReply(const int64 UserID, const [EDiscordActivityJoinRequestReplyTypes::Type](#discord-activity-join-request-reply-types-ediscordactivityjoinrequestreplytypes) Reply, TFunction<void(discord::Result)> Callback)</code><b>  
+<b><code>void SendRequestReply(const int64 UserID, const [EDiscordActivityJoinRequestReplyTypes::Type](#discord-activity-join-request-reply-types-ediscordactivityjoinrequestreplytypes) Reply, TFunction<void(discord::Result)> Callback)</code></b>  
 Sends a reply to an Ask to Join request.
 
 ---
