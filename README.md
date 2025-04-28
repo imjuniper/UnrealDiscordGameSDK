@@ -81,7 +81,7 @@ Returns whether the call was a success. Used if you are distributing this SDK on
 > [!NOTE]
 > The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
 
-**`void UpdateActivity(const FDiscordActivity NewActivity, TFunction<void(discord::Result)> Callback)`**  
+<b><code>void UpdateActivity(const [FDiscordActivity](#discord-activity-fdiscordactivity) NewActivity, TFunction<void(discord::Result)> Callback)</code><b>  
 Get user information for a given id.
 
 ---
@@ -98,7 +98,7 @@ Clear's a user's presence in Discord to make it show nothing.
 > [!NOTE]
 > The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
 
-**`void SendRequestReply(const int64 UserID, const EDiscordActivityJoinRequestReplyTypes::Type Reply, TFunction<void(discord::Result)> Callback)`**  
+<b><code>void SendRequestReply(const int64 UserID, const [EDiscordActivityJoinRequestReplyTypes::Type](#discord-activity-join-request-reply-types-ediscordactivityjoinrequestreplytypes) Reply, TFunction<void(discord::Result)> Callback)</code><b>  
 Sends a reply to an Ask to Join request.
 
 ---
@@ -201,19 +201,19 @@ The player's current party status.
 What the player is currently doing.
 
 ---
-**`FDiscordActivityTimestamps Timestamps`**  
+<b><code>[FDiscordActivityTimestamps](#discord-activity-timestamps-fdiscordactivitytimestamps) Timestamps</code></b>  
 Helps create elapsed/remaining timestamps on a player's profile.
 
 ---
-**`FDiscordActivityAssets Assets`**  
+<b><code>[FDiscordActivityAssets](#discord-activity-assets-fdiscordactivityassets) Assets</code></b>  
 Assets to display on the player's profile.
 
 ---
-**`FDiscordActivityParty Party`**  
+<b><code>[FDiscordActivityParty](#discord-activity-party-fdiscordactivityparty) Party</code></b>  
 Information about the player's party.
 
 ---
-**`FDiscordActivitySecrets Secrets`**  
+<b><code>[FDiscordActivitySecrets](#discord-activity-secrets-fdiscordactivitysecrets)) Secrets</code></b>  
 Secret passwords for joining the player's game.
 
 ---
@@ -224,11 +224,11 @@ Whether this activity is an instanced context, like a match.
 
 For C++ usage, has a converting constructor for the native Discord type, and can be converted to that type with `ToDiscordType()`.
 
-**`bool GetCurrentUser(FDiscordUser& User)`**  
+<b><code>bool GetCurrentUser([FDiscordUser](#discord-user-fdiscorduser)& User)</code></b>  
 Fetch information about the currently connected user account. Returns whether the call was a success.
 
 ---
-**`OnCurrentUserUpdated(FDiscordUser User)` (delegate)**  
+<b><code>OnCurrentUserUpdated([FDiscordUser](#discord-user-fdiscorduser) User)</code> (delegate)</b>  
 Fires when the `User` struct of the currently connected user changes. They may have changed their avatar, username, or something else.
 
 ---
@@ -239,11 +239,11 @@ Fires when the `User` struct of the currently connected user changes. They may h
 Get user information for a given User ID.
 
 ---
-**`TEnumAsByte<EDiscordPremiumTypes::Type> GetCurrentUserPremiumType()`**  
+<b><code>TEnumAsByte<[EDiscordPremiumTypes::Type](#discord-premium-types-ediscordpremiumtypes)> GetCurrentUserPremiumType()</code></b>  
 Returns the [EDiscordPremiumTypes](#discord-premium-types-ediscordpremiumtypes) of the current user.
 
 ---
-**`bool CurrentUserHasFlag(EDiscordUserFlags Flag)`**  
+<b><code>bool CurrentUserHasFlag([EDiscordUserFlags](#discord-user-flags-ediscorduserflags) Flag)</code></b>  
 Returns whether the current user has the flag.
 
 ### Discord User (`FDiscordUser`)
