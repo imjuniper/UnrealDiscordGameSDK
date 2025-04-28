@@ -5,7 +5,7 @@
 > [!NOTE]
 > Discord has now released their new [Social SDK](https://discord.com/developers/docs/discord-social-sdk/overview), with an official Unreal Engine plugin to go along with it. Currently, this new SDK requires manual authentication, since it doesn't communicate with the Discord app directly, which can be annoying in a lot of cases, so this plugin should still be useful to some who require minimal features, such as Rich Presence!
 
-- [Discord Integration for UE5](#discord-integration-for-ue5)
+<!-- no toc -->
 - [Installation](#installation)
 	- [Pre-built](#pre-built)
 	- [Building from source](#building-from-source)
@@ -13,16 +13,9 @@
 	- [Discord Game SDK Settings (project settings)](#discord-game-sdk-settings-project-settings)
 	- [Discord Subsystem (`UDiscordSubsystem`)](#discord-subsystem-udiscordsubsystem)
 	- [Discord Activity Manager (`UDiscordActivityManager`)](#discord-activity-manager-udiscordactivitymanager)
-		- [Discord Activity Join Request Reply Types (`EDiscordActivityJoinRequestReplyTypes`)](#discord-activity-join-request-reply-types-ediscordactivityjoinrequestreplytypes)
-		- [Discord Activity Timestamps (`FDiscordActivityTimestamps`)](#discord-activity-timestamps-fdiscordactivitytimestamps)
-		- [Discord Activity Assets (`FDiscordActivityAssets`)](#discord-activity-assets-fdiscordactivityassets)
-		- [Discord Activity Party (`FDiscordActivityParty`)](#discord-activity-party-fdiscordactivityparty)
-		- [Discord Activity Secrets (`FDiscordActivitySecrets`)](#discord-activity-secrets-fdiscordactivitysecrets)
 		- [Discord Activity (`FDiscordActivity`)](#discord-activity-fdiscordactivity)
 	- [Discord User Manager (`UDiscordUserManager`)](#discord-user-manager-udiscordusermanager)
 		- [Discord User (`FDiscordUser`)](#discord-user-fdiscorduser)
-		- [Discord User Flags (`EDiscordUserFlags`)](#discord-user-flags-ediscorduserflags)
-		- [Discord Premium Types (`EDiscordPremiumTypes`)](#discord-premium-types-ediscordpremiumtypes)
 	- [Discord Overlay Manager (`UDiscordOverlayManager`)](#discord-overlay-manager-udiscordoverlaymanager)
 
 # Installation
