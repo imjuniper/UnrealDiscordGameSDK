@@ -35,6 +35,9 @@ Download this repo, put it in the `Plugins/` folder of your project. Ensure that
 
 The large majority of the functions match what's available directly from the SDK. See [Discord's documentation](https://discord.com/developers/docs/developer-tools/game-sdk#using-the-sdk) for more information.
 
+> [!NOTE]
+> The Blueprint versions of functions with a `Callback` parameter are latent and don't return the error code, they just have execution pins for **Success** and **Failed** as well as output pins for the other callback output parameters.
+
 ## Discord Game SDK Settings (project settings)
 
 **`Require Discord`**  
@@ -78,8 +81,6 @@ Returns whether the call was a success. Registers a command by which Discord can
 Returns whether the call was a success. Used if you are distributing this SDK on Steam. Registers your game's Steam App ID for the protocol `steam://run-game-id/<id>`.
 
 ---
-> [!NOTE]
-> The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
 
 <b><code>void UpdateActivity(const [FDiscordActivity](#discord-activity-fdiscordactivity) NewActivity, TFunction<void(discord::Result)> Callback)</code></b>  
 Get user information for a given id.
@@ -88,23 +89,14 @@ Get user information for a given id.
 > [!WARNING]
 > This probably won't work, see [issue 6612](https://github.com/discord/discord-api-docs/issues/6612) in the Discord API Docs.
 
-> [!NOTE]
-> The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
-
 **`void ClearActivity(TFunction<void(discord::Result)> Callback)`**  
 Clear's a user's presence in Discord to make it show nothing.
 
 ---
-> [!NOTE]
-> The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
-
 <b><code>void SendRequestReply(const int64 UserID, const [EDiscordActivityJoinRequestReplyTypes::Type](#discord-activity-join-request-reply-types-ediscordactivityjoinrequestreplytypes) Reply, TFunction<void(discord::Result)> Callback)</code></b>  
 Sends a reply to an Ask to Join request.
 
 ---
-> [!NOTE]
-> The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
-
 **`void SendInvite(const int64 UserID, const FString Content, TFunction<void(discord::Result)> Callback)> Callback)`**  
 Sends a game invite to a given user. If you do not have a valid activity with all the required fields, this call will error.
 
@@ -232,9 +224,6 @@ Fetch information about the currently connected user account. Returns whether th
 Fires when the `User` struct of the currently connected user changes. They may have changed their avatar, username, or something else.
 
 ---
-> [!NOTE]
-> The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
-
 **`void GetUser(const int64 UserID, TFunction<void(discord::Result, discord::User const&)> Callback)`**  
 Get user information for a given User ID.
 
@@ -303,9 +292,6 @@ Return whether the overlay is currently locked or unlocked
 Fires when the overlay is locked or unlocked (a.k.a. opened or closed).
 
 ---
-> [!NOTE]
-> The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
-
 **`void SetLocked(const bool bLocked, TFunction<void(discord::Result)> Callback)`**  
 Locks or unlocks input in the overlay. Calling `SetLocked(true)` will also close any modals in the overlay.
 
