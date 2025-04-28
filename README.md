@@ -5,6 +5,19 @@
 > [!NOTE]
 > Discord has now released their new [Social SDK](https://discord.com/developers/docs/discord-social-sdk/overview), with an official Unreal Engine plugin to go along with it. Currently, this new SDK requires manual authentication, since it doesn't communicate with the Discord app directly, which can be annoying in a lot of cases, so this plugin should still be useful to some who require minimal features, such as Rich Presence!
 
+<!-- no toc -->
+- [Installation](#installation)
+	- [Pre-built](#pre-built)
+	- [Building from source](#building-from-source)
+- [Usage](#usage)
+	- [Discord Game SDK Settings (project settings)](#discord-game-sdk-settings-project-settings)
+	- [Discord Subsystem (`UDiscordSubsystem`)](#discord-subsystem-udiscordsubsystem)
+	- [Discord Activity Manager (`UDiscordActivityManager`)](#discord-activity-manager-udiscordactivitymanager)
+		- [Discord Activity (`FDiscordActivity`)](#discord-activity-fdiscordactivity)
+	- [Discord User Manager (`UDiscordUserManager`)](#discord-user-manager-udiscordusermanager)
+		- [Discord User (`FDiscordUser`)](#discord-user-fdiscorduser)
+	- [Discord Overlay Manager (`UDiscordOverlayManager`)](#discord-overlay-manager-udiscordoverlaymanager)
+
 # Installation
 
 ## Pre-built
@@ -21,6 +34,9 @@ Download this repo, put it in the `Plugins/` folder of your project. Ensure that
 # Usage
 
 The large majority of the functions match what's available directly from the SDK. See [Discord's documentation](https://discord.com/developers/docs/developer-tools/game-sdk#using-the-sdk) for more information.
+
+> [!NOTE]
+> The Blueprint versions of functions with a `Callback` parameter are latent and don't return the error code, they just have execution pins for **Success** and **Failed** as well as output pins for the other callback output parameters.
 
 ## Discord Game SDK Settings (project settings)
 
@@ -44,16 +60,16 @@ The **Discord Subsystem** is used to managed the Discord Client and create the t
 Returns whether the subsystem is currently initialized. Will usually return false if the Client ID isn't set in settings, if the Discord SDK binaries are missing or if the Client failed to initialize.
 
 ---
-**`UDiscordActivityManager* GetDiscordActivityManager()`**  
-Returns the current instance of [Discord Activity Manager](#discord-activity-manager).
+<b><code>[UDiscordActivityManager](#discord-activity-manager-udiscordactivitymanager)* GetDiscordActivityManager()</code></b>  
+Returns the current instance of [Discord Activity Manager](#discord-activity-manager-udiscordactivitymanager).
 
 ---
-**`UDiscordUserManager* GetDiscordUserManager()`**  
-Returns the current instance of [Discord User Manager](#discord-user-manager).
+<b><code>[UDiscordUserManager](#discord-user-manager-udiscordusermanager)* GetDiscordUserManager()</code></b>  
+Returns the current instance of [Discord User Manager](#discord-user-manager-udiscordusermanager).
 
 ---
-**`UDiscordOverlayManager* GetDiscordOverlayManager()`**  
-Returns the current instance of [Discord Overlay Manager](#discord-overlay-manager).
+<b><code>[UDiscordOverlayManager](#discord-overlay-manager-udiscordoverlaymanager)* GetDiscordOverlayManager()</code></b>  
+Returns the current instance of [Discord Overlay Manager](#discord-overlay-manager-udiscordoverlaymanager).
 
 ## Discord Activity Manager (`UDiscordActivityManager`)
 
@@ -65,33 +81,22 @@ Returns whether the call was a success. Registers a command by which Discord can
 Returns whether the call was a success. Used if you are distributing this SDK on Steam. Registers your game's Steam App ID for the protocol `steam://run-game-id/<id>`.
 
 ---
-> [!NOTE]
-> The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
 
-**`void UpdateActivity(const FDiscordActivity NewActivity, TFunction<void(discord::Result)> Callback)`**  
+<b><code>void UpdateActivity(const [FDiscordActivity](#discord-activity-fdiscordactivity) NewActivity, TFunction<void(discord::Result)> Callback)</code></b>  
 Get user information for a given id.
 
 ---
 > [!WARNING]
 > This probably won't work, see [issue 6612](https://github.com/discord/discord-api-docs/issues/6612) in the Discord API Docs.
 
-> [!NOTE]
-> The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
-
 **`void ClearActivity(TFunction<void(discord::Result)> Callback)`**  
 Clear's a user's presence in Discord to make it show nothing.
 
 ---
-> [!NOTE]
-> The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
-
-**`void SendRequestReply(const int64 UserID, const EDiscordActivityJoinRequestReplyTypes::Type Reply, TFunction<void(discord::Result)> Callback)`**  
+<b><code>void SendRequestReply(const int64 UserID, const [EDiscordActivityJoinRequestReplyTypes::Type](#discord-activity-join-request-reply-types-ediscordactivityjoinrequestreplytypes) Reply, TFunction<void(discord::Result)> Callback)</code></b>  
 Sends a reply to an Ask to Join request.
 
 ---
-> [!NOTE]
-> The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
-
 **`void SendInvite(const int64 UserID, const FString Content, TFunction<void(discord::Result)> Callback)> Callback)`**  
 Sends a game invite to a given user. If you do not have a valid activity with all the required fields, this call will error.
 
@@ -188,19 +193,19 @@ The player's current party status.
 What the player is currently doing.
 
 ---
-**`FDiscordActivityTimestamps Timestamps`**  
+<b><code>[FDiscordActivityTimestamps](#discord-activity-timestamps-fdiscordactivitytimestamps) Timestamps</code></b>  
 Helps create elapsed/remaining timestamps on a player's profile.
 
 ---
-**`FDiscordActivityAssets Assets`**  
+<b><code>[FDiscordActivityAssets](#discord-activity-assets-fdiscordactivityassets) Assets</code></b>  
 Assets to display on the player's profile.
 
 ---
-**`FDiscordActivityParty Party`**  
+<b><code>[FDiscordActivityParty](#discord-activity-party-fdiscordactivityparty) Party</code></b>  
 Information about the player's party.
 
 ---
-**`FDiscordActivitySecrets Secrets`**  
+<b><code>[FDiscordActivitySecrets](#discord-activity-secrets-fdiscordactivitysecrets)) Secrets</code></b>  
 Secret passwords for joining the player's game.
 
 ---
@@ -211,26 +216,23 @@ Whether this activity is an instanced context, like a match.
 
 For C++ usage, has a converting constructor for the native Discord type, and can be converted to that type with `ToDiscordType()`.
 
-**`bool GetCurrentUser(FDiscordUser& User)`**  
+<b><code>bool GetCurrentUser([FDiscordUser](#discord-user-fdiscorduser)& User)</code></b>  
 Fetch information about the currently connected user account. Returns whether the call was a success.
 
 ---
-**`OnCurrentUserUpdated(FDiscordUser User)` (delegate)**  
+<b><code>OnCurrentUserUpdated([FDiscordUser](#discord-user-fdiscorduser) User)</code> (delegate)</b>  
 Fires when the `User` struct of the currently connected user changes. They may have changed their avatar, username, or something else.
 
 ---
-> [!NOTE]
-> The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
-
 **`void GetUser(const int64 UserID, TFunction<void(discord::Result, discord::User const&)> Callback)`**  
 Get user information for a given User ID.
 
 ---
-**`TEnumAsByte<EDiscordPremiumTypes::Type> GetCurrentUserPremiumType()`**  
-Returns the [EDiscordPremiumTypes](#discord-premium-types-enum) of the current user.
+<b><code>TEnumAsByte<[EDiscordPremiumTypes::Type](#discord-premium-types-ediscordpremiumtypes)> GetCurrentUserPremiumType()</code></b>  
+Returns the [EDiscordPremiumTypes](#discord-premium-types-ediscordpremiumtypes) of the current user.
 
 ---
-**`bool CurrentUserHasFlag(EDiscordUserFlags Flag)`**  
+<b><code>bool CurrentUserHasFlag([EDiscordUserFlags](#discord-user-flags-ediscorduserflags) Flag)</code></b>  
 Returns whether the current user has the flag.
 
 ### Discord User (`FDiscordUser`)
@@ -290,9 +292,6 @@ Return whether the overlay is currently locked or unlocked
 Fires when the overlay is locked or unlocked (a.k.a. opened or closed).
 
 ---
-> [!NOTE]
-> The Blueprint version is latent and doesn't return the error code, it just has pins for **Success** and **Failed**.
-
 **`void SetLocked(const bool bLocked, TFunction<void(discord::Result)> Callback)`**  
 Locks or unlocks input in the overlay. Calling `SetLocked(true)` will also close any modals in the overlay.
 
