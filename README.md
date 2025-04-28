@@ -58,15 +58,15 @@ Returns whether the subsystem is currently initialized. Will usually return fals
 
 ---
 **`UDiscordActivityManager* GetDiscordActivityManager()`**  
-Returns the current instance of [Discord Activity Manager](#discord-activity-manager).
+Returns the current instance of [Discord Activity Manager](#discord-activity-manager-udiscordactivitymanager).
 
 ---
 **`UDiscordUserManager* GetDiscordUserManager()`**  
-Returns the current instance of [Discord User Manager](#discord-user-manager).
+Returns the current instance of [Discord User Manager](#discord-user-manager-udiscordusermanager).
 
 ---
 **`UDiscordOverlayManager* GetDiscordOverlayManager()`**  
-Returns the current instance of [Discord Overlay Manager](#discord-overlay-manager).
+Returns the current instance of [Discord Overlay Manager](#discord-overlay-manager-udiscordoverlaymanager).
 
 ## Discord Activity Manager (`UDiscordActivityManager`)
 
@@ -240,7 +240,7 @@ Get user information for a given User ID.
 
 ---
 **`TEnumAsByte<EDiscordPremiumTypes::Type> GetCurrentUserPremiumType()`**  
-Returns the [EDiscordPremiumTypes](#discord-premium-types-enum) of the current user.
+Returns the [EDiscordPremiumTypes](#discord-premium-types-ediscordpremiumtypes) of the current user.
 
 ---
 **`bool CurrentUserHasFlag(EDiscordUserFlags Flag)`**  
