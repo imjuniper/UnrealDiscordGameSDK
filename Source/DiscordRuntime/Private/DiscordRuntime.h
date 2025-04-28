@@ -1,4 +1,4 @@
-// Copyright Jakob Bouchard. All Rights Reserved.
+// Copyright Juniper Bouchard. All Rights Reserved.
 
 #pragma once
 

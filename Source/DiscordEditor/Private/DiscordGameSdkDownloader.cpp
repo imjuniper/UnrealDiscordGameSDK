@@ -1,4 +1,4 @@
-﻿// Copyright Jakob Bouchard. All Rights Reserved.
+﻿// Copyright Juniper Bouchard. All Rights Reserved.
 
 #include "DiscordGameSdkDownloader.h"
 
@@ -133,7 +133,7 @@ void FDiscordGameSdkDownloader::OnRequestComplete(FHttpRequestPtr HttpRequest, F
 
 	if (HttpResponse->GetResponseCode() == EHttpResponseCodes::NotFound)
 	{
-		return Destroy("The Discord Game SDK URL was not found.\nDiscord might have moved or deleted the SDK, please contact me at jakob@bchrd.ca");
+		return Destroy("The Discord Game SDK URL was not found.\nDiscord might have moved or deleted the SDK, please contact me at juniper@bchrd.ca");
 	}
 	
 	if (HttpResponse->GetResponseCode() != EHttpResponseCodes::Ok)
