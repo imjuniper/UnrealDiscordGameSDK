@@ -22,9 +22,6 @@
 
 ## Pre-built
 
-> [!NOTE]
-> I only provide prebuilt binaries for Unreal 5.5 at this moment.
-
 You can download the latest pre-built version in the Releases page.
 
 ## Building from source
