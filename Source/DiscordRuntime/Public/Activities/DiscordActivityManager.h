@@ -2,17 +2,18 @@
 
 #pragma once
 
-#include "Discord/activity_manager.h"
+#include "DiscordTypes.h"
 #include "DiscordActivity.h" 
 #include "UObject/Object.h"
 #include "Users/DiscordUser.h"
 #include "DiscordActivityManager.generated.h"
 
-
 enum class EDiscordOutputPins : uint8;
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDiscordActivityJoinSignature, FString, Secret);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDiscordActivityJoinRequestSignature, FDiscordUser, User);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnDiscordActivityInviteSignature, FDiscordUser, User, FDiscordActivity, Activity);
+
 
 UCLASS(Within=DiscordSubsystem)
 class DISCORDRUNTIME_API UDiscordActivityManager : public UObject

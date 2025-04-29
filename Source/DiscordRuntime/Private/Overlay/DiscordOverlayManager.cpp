@@ -5,6 +5,7 @@
 #include "DiscordLatentAction.h"
 #include "DiscordLogChannel.h"
 #include "DiscordSubsystem.h"
+#include "Discord/overlay_manager.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(DiscordOverlayManager)
 

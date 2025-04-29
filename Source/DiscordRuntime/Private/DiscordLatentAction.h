@@ -3,6 +3,8 @@
 #pragma once
 
 #include "DiscordSettings.h"
+#include "Engine/LatentActionManager.h"
+#include "LatentActions.h"
 #include "DiscordLatentAction.generated.h"
 
 

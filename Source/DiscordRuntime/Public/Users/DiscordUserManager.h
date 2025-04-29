@@ -2,15 +2,15 @@
 
 #pragma once
 
-#include "Discord/user_manager.h"
+#include "DiscordTypes.h"
 #include "DiscordUser.h"
 #include "UObject/Object.h"
 #include "DiscordUserManager.generated.h"
 
 enum class EDiscordOutputPins : uint8;
 
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDiscordCurrentUserUpdatedSignature, FDiscordUser, User);
+
 
 UCLASS(Within=DiscordSubsystem)
 class DISCORDRUNTIME_API UDiscordUserManager : public UObject

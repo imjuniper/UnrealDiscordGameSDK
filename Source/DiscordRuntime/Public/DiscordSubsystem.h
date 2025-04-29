@@ -2,14 +2,15 @@
 
 #pragma once
 
-#include "Discord/discord.h"
+#include "DiscordTypes.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "Tickable.h"
+#include "Runtime/Launch/Resources/Version.h"
 #include "DiscordSubsystem.generated.h"
 
 class UDiscordActivityManager;
 class UDiscordUserManager;
 class UDiscordOverlayManager;
-
 
 #define DISCORD_UE_VERSION (ENGINE_MAJOR_VERSION * 100 + ENGINE_MINOR_VERSION)
 
@@ -27,7 +28,7 @@ public:
 
 	// Begin FTickableGameObject interface
 	virtual void Tick(const float DeltaTime) override;
-	virtual UWorld* GetTickableGameObjectWorld() const override { return GetGameInstance()->GetWorld(); }
+	virtual UWorld* GetTickableGameObjectWorld() const override;
 	virtual bool IsTickableWhenPaused() const override { return true; }
 	virtual ETickableTickType GetTickableTickType() const override;
 #if DISCORD_UE_VERSION < 505
@@ -62,7 +63,7 @@ public:
 	UDiscordOverlayManager* GetOverlayManager() const { check(OverlayManager); return OverlayManager; }
 
 private:
-	TUniquePtr<discord::Core> Core = nullptr;
+	discord::Core* Core = nullptr;
 	
 	UPROPERTY()
 	TObjectPtr<UDiscordActivityManager> ActivityManager;

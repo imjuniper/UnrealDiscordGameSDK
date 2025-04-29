@@ -3,6 +3,8 @@
 #include "DiscordLatentAction.h"
 
 #include "DiscordLogChannel.h"
+#include "Engine/Engine.h"
+#include "Engine/World.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(DiscordLatentAction)
 

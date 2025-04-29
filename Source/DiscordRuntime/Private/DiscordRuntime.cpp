@@ -2,6 +2,10 @@
 
 #include "DiscordRuntime.h"
 
+#include "HAL/PlatformProcess.h"
+#include "Misc/Paths.h"
+#include "Modules/ModuleManager.h"
+
 
 FDiscordRuntimeModule& FDiscordRuntimeModule::Get()
 {

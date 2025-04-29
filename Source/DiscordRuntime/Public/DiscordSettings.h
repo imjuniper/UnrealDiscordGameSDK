@@ -13,14 +13,14 @@ class UDiscordSettings : public UDeveloperSettings
 
 public:
 	/** Whether to relaunch the app if Discord is not open. */
-	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(Category="Configuration",Config,  EditDefaultsOnly, BlueprintReadOnly)
 	bool bRequireDiscord = false;
 	
 	/** This can be obtained from Discord Developer Portal. */
-	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(Category="Configuration", Config, EditDefaultsOnly, BlueprintReadOnly)
 	int64 ClientID = -1;
 
 	/** The time to wait before assuming a callback failed. */
-	UPROPERTY(Config, EditDefaultsOnly, BlueprintReadOnly, meta=(Units="Seconds"))
+	UPROPERTY(Category="Configuration", Config, EditDefaultsOnly, BlueprintReadOnly, meta=(Units="Seconds"))
 	float TimeoutSeconds = 5.f;
 };

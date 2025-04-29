@@ -5,6 +5,7 @@
 #include "DiscordLogChannel.h"
 #include "DiscordRuntime.h"
 #include "DiscordSettings.h"
+#include "Discord/core.h"
 #include "Activities/DiscordActivityManager.h"
 #include "Overlay/DiscordOverlayManager.h"
 #include "Users/DiscordUserManager.h"
@@ -55,10 +56,8 @@ void UDiscordSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 		return;
 	}
 
-	discord::Core* CoreInstance = nullptr;
-
 #if PLATFORM_DESKTOP && !WITH_EDITOR
-	const auto CreateResult = discord::Core::Create(DiscordSettings->ClientID, DiscordSettings->bRequireDiscord ? DiscordCreateFlags_Default : DiscordCreateFlags_NoRequireDiscord, &CoreInstance);
+	const auto CreateResult = discord::Core::Create(DiscordSettings->ClientID, DiscordSettings->bRequireDiscord ? DiscordCreateFlags_Default : DiscordCreateFlags_NoRequireDiscord, &Core);
 #else
 #if WITH_EDITOR
 	if (DiscordSettings->bRequireDiscord)
@@ -66,17 +65,16 @@ void UDiscordSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 		LOG_DISCORD(Warning, "Discord is required, but we can't force-relaunch the editor. Please make sure Discord is open!");
 	}
 #endif
-	const auto CreateResult = discord::Core::Create(DiscordSettings->ClientID, DiscordCreateFlags_NoRequireDiscord, &CoreInstance);
+	const auto CreateResult = discord::Core::Create(DiscordSettings->ClientID, DiscordCreateFlags_NoRequireDiscord, &Core);
 #endif
 
 	if (CreateResult != discord::Result::Ok)
 	{
 		LOG_DISCORD(Error, "Failed to initialize Core");
-		CoreInstance = nullptr;
+		Core = nullptr;
 		return;
 	}
 	
-	Core = TUniquePtr<discord::Core>(CoreInstance);
 	Core->SetLogHook(discord::LogLevel::Debug, PrintDiscordLog);
 	
 	ActivityManager->Initialize(&Core->ActivityManager());
@@ -92,7 +90,12 @@ void UDiscordSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 
 void UDiscordSubsystem::Tick(const float DeltaTime)
 {
-	if (Core.IsValid()) Core->RunCallbacks();
+	if (IsActive()) Core->RunCallbacks();
+}
+
+UWorld* UDiscordSubsystem::GetTickableGameObjectWorld() const
+{
+	return GetGameInstance()->GetWorld();
 }
 
 ETickableTickType UDiscordSubsystem::GetTickableTickType() const
@@ -111,13 +114,13 @@ bool UDiscordSubsystem::IsAllowedToTick() const
 	// No matter what IsTickable says, don't let CDOs or uninitialized world subsystems tick :
 	// Note: even if GetTickableTickType was overridden by the child class and returns something else than ETickableTickType::Never for CDOs, 
 	//  it's probably a mistake, so by default, don't allow ticking. If the child class really intends its CDO to tick, it can always override IsAllowedToTick...
-	return !IsTemplate() && Core.IsValid();
+	return !IsTemplate() && Core != nullptr;
 }
 #endif
 
 bool UDiscordSubsystem::IsActive() const
 {
-	return Core.IsValid();
+	return Core != nullptr;
 }
 
 void UDiscordSubsystem::Deinitialize()
@@ -126,5 +129,9 @@ void UDiscordSubsystem::Deinitialize()
 	SetTickableTickType(ETickableTickType::Never);
 #endif
 
-	if (Core.IsValid()) Core.Reset();
+	if (IsActive())
+	{
+		delete Core;
+		Core = nullptr;
+	}
 }

@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Discord/overlay_manager.h"
+#include "DiscordTypes.h"
 #include "UObject/Object.h"
 #include "DiscordOverlayManager.generated.h"
 

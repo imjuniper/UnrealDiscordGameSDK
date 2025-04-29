@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Discord/types.h"
+#include "DiscordTypes.h"
 #include "DiscordActivity.generated.h"
 
 
@@ -26,21 +26,9 @@ struct FDiscordActivityTimestamps
 public:
 	FDiscordActivityTimestamps() = default;
 	
-	explicit FDiscordActivityTimestamps(discord::ActivityTimestamps const& Timestamps)
-	{
-		Start = Timestamps.GetStart();
-		End = Timestamps.GetEnd();
-	}
+	explicit FDiscordActivityTimestamps(discord::ActivityTimestamps const& Timestamps);
 
-	discord::ActivityTimestamps ToDiscordType() const
-	{
-		discord::ActivityTimestamps Timestamps;
-		
-		Timestamps.SetStart(Start);
-		Timestamps.SetEnd(End);
-		
-		return Timestamps;
-	}
+	discord::ActivityTimestamps ToDiscordType() const;
 
 	/**
 	 * Unix timestamp. Send this to have an "elapsed" timer.
@@ -64,25 +52,9 @@ struct FDiscordActivityAssets
 public:
 	FDiscordActivityAssets() = default;
 	
-	explicit FDiscordActivityAssets(discord::ActivityAssets const& Assets)
-	{
-		LargeImageKey = Assets.GetLargeImage();
-		LargeImageText = Assets.GetLargeText();
-		SmallImageKey = Assets.GetSmallImage();
-		SmallImageText = Assets.GetSmallText();
-	}
+	explicit FDiscordActivityAssets(discord::ActivityAssets const& Assets);
 
-	discord::ActivityAssets ToDiscordType() const
-	{
-		discord::ActivityAssets Assets;
-		
-		Assets.SetLargeImage(TCHAR_TO_UTF8(*LargeImageKey));
-		Assets.SetLargeText(TCHAR_TO_UTF8(*LargeImageText));
-		Assets.SetSmallImage(TCHAR_TO_UTF8(*SmallImageKey));
-		Assets.SetSmallText(TCHAR_TO_UTF8(*SmallImageText));
-		
-		return Assets;
-	}
+	discord::ActivityAssets ToDiscordType() const;
 
 	/**
 	 * Key for the large image.
@@ -118,23 +90,9 @@ struct FDiscordActivityParty
 public:
 	FDiscordActivityParty() = default;
 	
-	explicit FDiscordActivityParty(discord::ActivityParty const& Party)
-	{
-		ID = Party.GetId();
-		CurrentSize = Party.GetSize().GetCurrentSize();
-		MaxSize = Party.GetSize().GetMaxSize();
-	}
+	explicit FDiscordActivityParty(discord::ActivityParty const& Party);
 
-	discord::ActivityParty ToDiscordType() const
-	{
-		discord::ActivityParty Party;
-		
-		Party.SetId(TCHAR_TO_UTF8(*ID));
-		Party.GetSize().SetCurrentSize(CurrentSize);
-		Party.GetSize().SetMaxSize(MaxSize);
-		
-		return Party;
-	}
+	discord::ActivityParty ToDiscordType() const;
 
 	/**
 	 * A unique identifier for this party.
@@ -164,21 +122,9 @@ struct FDiscordActivitySecrets
 public:
 	FDiscordActivitySecrets() = default;
 	
-	explicit FDiscordActivitySecrets(discord::ActivitySecrets const& Secrets)
-	{
-		Match = Secrets.GetMatch();
-		Join = Secrets.GetJoin();
-	}
+	explicit FDiscordActivitySecrets(discord::ActivitySecrets const& Secrets);
 
-	discord::ActivitySecrets ToDiscordType() const
-	{
-		discord::ActivitySecrets Secrets;
-		
-		Secrets.SetMatch(TCHAR_TO_UTF8(*Match));
-		Secrets.SetJoin(TCHAR_TO_UTF8(*Join));
-		
-		return Secrets;
-	}
+	discord::ActivitySecrets ToDiscordType() const;
 
 	/**
 	 * Unique hash for the given match context.
@@ -202,54 +148,10 @@ struct FDiscordActivity
 public:
 	FDiscordActivity() = default;
 
-	explicit FDiscordActivity(discord::Activity const& Activity)
-	{
-		ApplicationID = Activity.GetApplicationId();
-		Name = Activity.GetName();
-		State = Activity.GetState();
-		Details = Activity.GetDetails();
-		bInstance = Activity.GetInstance();
-		Timestamps = FDiscordActivityTimestamps(Activity.GetTimestamps());
-		Assets = FDiscordActivityAssets(Activity.GetAssets());
-		Party = FDiscordActivityParty(Activity.GetParty());
-		Secrets = FDiscordActivitySecrets(Activity.GetSecrets());
-	}
+	explicit FDiscordActivity(discord::Activity const& Activity);
 
-	discord::Activity ToDiscordType() const
-	{
-		discord::Activity Activity{};
+	discord::Activity ToDiscordType() const;
 
-		if (ApplicationID != -1)
-		{
-			Activity.SetApplicationId(ApplicationID);
-			Activity.SetName(TCHAR_TO_UTF8(*Name));
-		}
-		Activity.SetState(TCHAR_TO_UTF8(*State));
-		Activity.SetDetails(TCHAR_TO_UTF8(*Details));
-		Activity.SetInstance(bInstance);
-
-		// Activity Timestamps
-		Activity.GetTimestamps().SetStart(Timestamps.Start);
-		Activity.GetTimestamps().SetEnd(Timestamps.End);
-	
-		// Activity Assets
-		Activity.GetAssets().SetLargeImage(TCHAR_TO_UTF8(*Assets.LargeImageKey));
-		Activity.GetAssets().SetLargeText(TCHAR_TO_UTF8(*Assets.LargeImageText));
-		Activity.GetAssets().SetSmallImage(TCHAR_TO_UTF8(*Assets.SmallImageKey));
-		Activity.GetAssets().SetSmallText(TCHAR_TO_UTF8(*Assets.SmallImageText));
-	
-		// Activity Party
-		Activity.GetParty().SetId(TCHAR_TO_UTF8(*Party.ID));
-		Activity.GetParty().GetSize().SetCurrentSize(Party.CurrentSize);
-		Activity.GetParty().GetSize().SetMaxSize(Party.MaxSize);
-	
-		// Activity Secrets
-		Activity.GetSecrets().SetMatch(TCHAR_TO_UTF8(*Secrets.Match));
-		Activity.GetSecrets().SetJoin(TCHAR_TO_UTF8(*Secrets.Join));
-		
-		return Activity;
-	}
-	
 	/**
 	 * Your application ID. This is a read-only field.
 	 */
