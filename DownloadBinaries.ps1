@@ -60,7 +60,7 @@ Foreach ($File in $Files) {
 		New-Item -ItemType Directory -Path $DestinationPath | Out-Null
 	}
 	echo "Copying $File to $DestinationPath"
-	Copy-Item -Path $File -Destination $DestinationPath
+	Copy-Item -Path $FilePath -Destination $DestinationPath
 }
 
 Remove-Item -Path ".\Intermediate\discord-game-sdk.zip"
