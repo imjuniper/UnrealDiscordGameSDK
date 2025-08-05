@@ -1,9 +1,11 @@
-Build
-Binaries
-DerivedDataCache
-Intermediate
-Saved
-.vs
+ArchivedBuilds/
+Build/
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.idea/
+.vs/
 *.VC.db
 *.opensdf
 *.opendb
@@ -12,4 +14,3 @@ Saved
 *.suo
 *.xcodeproj
 *.xcworkspace
-.idea/
